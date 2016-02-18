@@ -1,0 +1,104 @@
+body {
+  font-family: 'Open Sans' Helvetica, Arial, sans-serif;
+}
+img {
+  width: 100%;
+}
+p {
+  line-height: 1.2em;
+}
+.row {
+  margin: 20px 0;
+}
+.date {
+  font-family: Verdana;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  font-size: 11px;
+}
+.col-xs-6 .col-xs-12 {
+  margin-top: 25px;
+  padding:0;
+}
+.col-xs-6 .col-xs-6 .col-xs-6 {
+  margin-top: 0;
+}
+hr {
+  margin: 10px 0;
+}
+h3 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #B1B1B1;
+  font-weight: 100;
+  font-size: 16px;
+  letter-spacing: 10px;
+  margin: 0 0 5px;
+  margin-left: 10px;
+}
+h5 {
+  text-align: center;
+  color: #B1B1B1;
+  font-weight: 100;
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin: 0 0 5px;
+}
+.well {
+  /*min-height: 180px;*/
+  margin: 0;
+  line-height: 21px;
+  text-align: center;
+}
+.well .row {
+  margin: 0;
+}
+.year {
+  font-size: 165%;
+font-weight: 100;
+text-align: left;
+margin-left: -4px;
+}
+.history {
+  font-size: 127%;
+text-align: left;
+}
+.excrept {
+  text-align: left;
+}
+.joke {
+  text-align: left;
+  font-size: 16px;
+}
+.news {
+  text-align: left;
+}
+.news div {
+  font-family: georgia;
+    line-height: 1.1em;
+    font-size: 109%;
+    margin-bottom: 5px;
+}
+.news p {
+  font-family: helvetica;
+      line-height: 1.1em;
+      font-size: 93%;
+      text-transform: uppercase;
+}
+
+.news p {
+  border-bottom: 1px dotted #000;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+.news p:last-of-type {
+  border: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.etom {
+  text-align: left;
+}
