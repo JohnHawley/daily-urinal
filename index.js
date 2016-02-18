@@ -314,6 +314,6 @@ scrapeInOrder(function(html) {
   console.log('Finished Scraping, Opening up HTML');
   fs.writeFile(printFile, html, "ascii", (err) => {
     if (err) throw err;
-    exec("open file:///Users/johnh/Documents/Projects/daily-urinal/print.html");
+    exec("open print.html");
   });
 });
