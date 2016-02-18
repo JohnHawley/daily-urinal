@@ -1,7 +1,9 @@
 # daily-urinal
-Generates a daily newsletter to post above a urinal
+Generates a daily newsletter to post above a urinal.
 
-# Install
+Uses the node [x-ray](https://github.com/lapwinglabs/x-ray) to scrape website data.
+
+##Install
 
 Requires node.js
 
@@ -11,5 +13,5 @@ Install dependencies: `npm install`
 
 Run: `node index`
 
-#Results
+##Results
 Results are outputted to a print.html file where the user can open and print from the browser
