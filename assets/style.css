@@ -19,7 +19,7 @@ p {
 }
 .col-xs-6 .col-xs-12 {
   margin-top: 25px;
-  padding:0;
+  padding: 0;
 }
 .col-xs-6 .col-xs-6 .col-xs-6 {
   margin-top: 0;
@@ -56,13 +56,13 @@ h5 {
 }
 .year {
   font-size: 165%;
-font-weight: 100;
-text-align: left;
-margin-left: -4px;
+  font-weight: 100;
+  text-align: left;
+  margin-left: -4px;
 }
 .history {
   font-size: 127%;
-text-align: left;
+  text-align: left;
 }
 .excrept {
   text-align: left;
@@ -76,17 +76,16 @@ text-align: left;
 }
 .news div {
   font-family: georgia;
-    line-height: 1.1em;
-    font-size: 109%;
-    margin-bottom: 5px;
+  line-height: 1.1em;
+  font-size: 109%;
+  margin-bottom: 5px;
 }
 .news p {
   font-family: helvetica;
-      line-height: 1.1em;
-      font-size: 93%;
-      text-transform: uppercase;
+  line-height: 1.1em;
+  font-size: 93%;
+  text-transform: uppercase;
 }
-
 .news p {
   border-bottom: 1px dotted #000;
   padding-bottom: 10px;
