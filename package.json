@@ -1,12 +1,12 @@
 {
-  "name": "urinal",
-  "version": "1.0.0",
-  "description": "Urinal Scraper",
+  "name": "daily-urinal",
+  "version": "0.0.2",
+  "description": "Generates a daily newsletter to post above a urinal",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "John",
+  "author": "John Hawley",
   "license": "MIT",
   "dependencies": {
     "x-ray": "^2.0.3"

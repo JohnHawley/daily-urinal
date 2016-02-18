@@ -168,8 +168,6 @@ function buildHtml(history, word, etomology, weather, joke, news, cb) {
   </div>
   `;
 
-
-
   /* ==============================
      =        BUILD HISTORY       =
      ============================== */
@@ -311,7 +309,7 @@ function buildHtml(history, word, etomology, weather, joke, news, cb) {
 }
 
 
-// ---- Run Scraper  ---- //
+// ---- Run Scraper Function ---- //
 scrapeInOrder(function(html) {
   console.log('Finished Scraping, Opening up HTML');
   fs.writeFile(printFile, html, "ascii", (err) => {
