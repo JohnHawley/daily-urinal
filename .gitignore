@@ -43,3 +43,4 @@ Thumbs.db
 node_modules
 index-v1.js
 data/*.json
+print.html
