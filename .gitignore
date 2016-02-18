@@ -40,4 +40,5 @@ Thumbs.db
 
 # project files      #
 ######################
+node_modules
 index-v1.js
