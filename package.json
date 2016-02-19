@@ -1,10 +1,11 @@
 {
   "name": "daily-urinal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generates a daily newsletter to post above a urinal",
-  "main": "index.js",
+  "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "start.js"
   },
   "author": "John Hawley",
   "license": "MIT",
