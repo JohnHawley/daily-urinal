@@ -1,4 +1,4 @@
-![Daily Urinal](https://github.com/johnhawley/daily-urinal/assets/urinal-logo.png "Logo")
+![Daily Urinal](https://raw.githubusercontent.com/JohnHawley/daily-urinal/master/assets/urinal-logo.png "Logo")
 
 Generates a daily newsletter to post above a urinal.
 
