@@ -1,3 +1,7 @@
+// ---- Node config ---- //
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+//Added as a workaround for bad SSL Certs
+
 // ---- Requires  ---- //
 var Xray = require('x-ray');
 var fs = require('fs');
@@ -17,13 +21,14 @@ var today = monthNames[d.getMonth()] + " " + d.getUTCDate();
 
 // ---- Asynchronus functions called in order (Synchronusly) lolz ---- //
 function scrapeInOrder(cb) {
+  console.log("Scraping data...");
   getHistory(function(dataHistory) {
     getWord(function(dataWord) {
       getEtomology((function(dataEtomology) {
         getWeather(function(dataWeather) {
-          getJoke(function(dataJoke) {
+          getFact(function(dataFact) {
             getNews(function(dataNews) {
-              buildHtml(dataHistory, dataWord, dataEtomology, dataWeather, dataJoke, dataNews, cb);
+              buildHtml(dataHistory, dataWord, dataEtomology, dataWeather, dataFact, dataNews, cb);
             });
           });
         });
@@ -106,12 +111,13 @@ function getWeather(cb) {
 }
 
 
-// ---- Get Joke Data ---- //
-function getJoke(cb) {
-  var url = "http://jokes.cc.com/";
-  var data = "data/joke.json";
-  x(url, '#content_holder', [{
-    joke: '.fulltext@html'
+// ---- Get Fact Data ---- //
+function getFact(cb) {
+  var url = "https://www.beagreatteacher.com/daily-fun-fact/";
+  var data = "data/fact.json";
+  x(url, 'main', [{
+    fact: 'p:nth-child(7)',
+    joke: 'p:nth-child(5)'
   }])(function(err, obj) {
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
@@ -141,7 +147,7 @@ function getNews(cb) {
 
 
 // ---- Build HTML File ---- //
-function buildHtml(history, word, etomology, weather, joke, news, cb) {
+function buildHtml(history, word, etomology, weather, fact, news, cb) {
 
   var head = `
   <head>
@@ -233,12 +239,12 @@ function buildHtml(history, word, etomology, weather, joke, news, cb) {
      }
 
  /* ==============================
-    =        BUILD Joke          =
+    =        BUILD Fact         =
     ============================== */
-     var htmlJoke = `
+     var htmlFact = `
      <h3>Joke of the day</h3>
      <div class="well joke">
-      <p>${joke[0].joke}</p>
+      <p>joke</p>
      </div>
      `;
 
@@ -284,9 +290,7 @@ function buildHtml(history, word, etomology, weather, joke, news, cb) {
         </div>
       </div>
 
-    <!--  <div class="col-xs-6">
-        ${htmlJoke}
-      </div> -->
+
 
       </div>
       `
