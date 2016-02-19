@@ -242,9 +242,9 @@ function buildHtml(history, word, etomology, weather, fact, news, cb) {
     =        BUILD Fact         =
     ============================== */
      var htmlFact = `
-     <h3>Joke of the day</h3>
+     <h3>RANDOM FACT</h3>
      <div class="well joke">
-      <p>joke</p>
+      <p>${fact[0].fact}</p>
      </div>
      `;
 
@@ -287,6 +287,9 @@ function buildHtml(history, word, etomology, weather, fact, news, cb) {
         </div>
         <div class="col-xs-12">
           ${htmlWord}
+        </div>
+        <div class="col-xs-12">
+          ${htmlFact}
         </div>
       </div>
 
