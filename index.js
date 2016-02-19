@@ -179,7 +179,6 @@ function buildHtml(history, word, etomology, weather, joke, news, cb) {
         <hr style="margin:5px;">
         <div class="excrept">
           <p>${history[0].excrept1}</p>
-          <!--<p>${history[0].excrept2}</p>-->
         </div>
      </div>
      `;
