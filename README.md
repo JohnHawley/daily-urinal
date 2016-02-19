@@ -1,4 +1,5 @@
-# daily-urinal
+![Daily Urinal](https://github.com/johnhawley/daily-urinal/assets/urinal-logo.png "Logo")
+
 Generates a daily newsletter to post above a urinal.
 
 Uses the node package [x-ray](https://github.com/lapwinglabs/x-ray) to scrape website data.
