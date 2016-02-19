@@ -12,7 +12,7 @@ Clone to your machine
 
 Install dependencies: `npm install`
 
-Run: `node index`
+Run: `npm start` or `node start`
 
 ##Results
 Results are outputted to a `print.html` file where the user can open and print from the browser.
