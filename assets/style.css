@@ -18,7 +18,7 @@ p {
   font-size: 11px;
 }
 .col-xs-6 .col-xs-12 {
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 0;
 }
 .col-xs-6 .col-xs-6 .col-xs-6 {
@@ -67,9 +67,12 @@ h5 {
 .excrept {
   text-align: left;
 }
-.joke {
-  text-align: left;
+.fact {
+  text-align: center;
   font-size: 16px;
+}
+.fact p {
+  margin: 0;
 }
 .news {
   text-align: left;

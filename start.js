@@ -243,7 +243,7 @@ function buildHtml(history, word, etomology, weather, fact, news, cb) {
     ============================== */
      var htmlFact = `
      <h3>RANDOM FACT</h3>
-     <div class="well joke">
+     <div class="well fact">
       <p>${fact[0].fact}</p>
      </div>
      `;
