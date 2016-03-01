@@ -7,6 +7,9 @@ var Xray = require('x-ray');
 var fs = require('fs');
 var exec = require('child_process').exec;
 
+// ---- Options ---- //
+var factOn = true;
+
 
 // ---- Globals  ---- //
 var x = Xray();
@@ -79,7 +82,7 @@ function getWord(cb) {
 
 // ---- Get Word Etomology Data ---- //
 function getEtomology(cb, word) {
-  var url = "http://www.etymonline.com/index.php?allowed_in_frame=0&search=" + word[0].word;
+  var url = "http://www.etymonline.com/index.php?allowed_in_frame=0&search=" + word[0].word.replace(" ", "+");
   var data = "data/etomology.json";
   x(url, '#dictionary', [{
     etomology: 'dd.highlight'
@@ -241,12 +244,18 @@ function buildHtml(history, word, etomology, weather, fact, news, cb) {
  /* ==============================
     =        BUILD Fact         =
     ============================== */
-     var htmlFact = `
-     <h3>RANDOM FACT</h3>
-     <div class="well fact">
-      <p>${fact[0].fact}</p>
-     </div>
-     `;
+    if (factOn) {
+      var htmlFact = `
+      <div class="col-xs-12">
+        <h3>RANDOM FACT</h3>
+        <div class="well fact">
+         <p>${fact[0].fact}</p>
+        </div>
+      </div>
+      `;
+    } else {
+      var htmlFact = '';
+    }
 
 
  /* ==============================
@@ -273,28 +282,23 @@ function buildHtml(history, word, etomology, weather, fact, news, cb) {
       var body = `
       ${header}
       <div class="row">
-      <div class="col-xs-6">
-        <div class="col-xs-12">
-          ${htmlNews}
+        <div class="col-xs-6">
+          <div class="col-xs-12">
+            ${htmlNews}
+          </div>
+          <div class="col-xs-12">
+            ${htmlWeather}
+          </div>
         </div>
-        <div class="col-xs-12">
-          ${htmlWeather}
+        <div class="col-xs-6">
+          <div class="col-xs-12">
+            ${htmlHistory}
+          </div>
+          <div class="col-xs-12">
+            ${htmlWord}
+          </div>
+            ${htmlFact}
         </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="col-xs-12">
-          ${htmlHistory}
-        </div>
-        <div class="col-xs-12">
-          ${htmlWord}
-        </div>
-        <div class="col-xs-12">
-          ${htmlFact}
-        </div>
-      </div>
-
-
-
       </div>
       `
 
