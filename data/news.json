@@ -1,111 +1,115 @@
 [
   {
-    "headline": "The Daily 202: Trump triumphed in last night's Republican debate",
-    "src": "Washington Post"
+    "headline": "During Endorsement, Carson Says There Are Two Donald Trumps",
+    "src": "NBCNews.com"
   },
   {
-    "headline": "State Dinner Becomes a Catwalk for Canadian Style",
-    "src": "New York Times"
+    "headline": "Trudeau pays tribute, relates to Obama daughters",
+    "src": "Washington Post"
   },
   {
     "headline": "How the 1981 assassination attempt changed Nancy Reagan",
     "src": "Los Angeles Times"
   },
   {
-    "headline": "UN Decries 'Horrendous Human Rights Violations' in South Sudan",
-    "src": "Voice of America"
+    "headline": "Number of North Korean Cyberattacks Doubled in Month, Seoul Says",
+    "src": "NBCNews.com"
   },
   {
-    "headline": "North Korea's Kim Jong-un Orders More Nuclear Tests",
-    "src": "Newsweek"
+    "headline": "Cesar Millan The Pig's Okay ... Now It Walks the Dog",
+    "src": "TMZ.com"
   },
   {
-    "headline": "'Dog Whisperer' Cesar Millan Under Investigation Over Possible Animal Cruelty",
-    "src": "CBS Local"
+    "headline": "UN report highlights 'searing' account of killings, rapes by South Sudanese forces",
+    "src": "UN News Centre"
   },
   {
-    "headline": "South African teen finds possible MH370 plane debris",
-    "src": "Washington Post"
+    "headline": "South African teen finds suspected piece of missing MH370 plane",
+    "src": "Reuters"
   },
   {
     "headline": "Obama: European distraction led to Libya 'mess'",
     "src": "CNN"
   },
   {
+    "headline": "Syrian opposition says it will rejoin peace talks",
+    "src": "CBS News"
+  },
+  {
     "headline": "South Sudan army 'suffocated 60 in shipping container,' Amnesty International reports",
     "src": "CNN"
   },
   {
-    "headline": "China to start civilian flights from disputed South China Sea island",
-    "src": "Reuters"
+    "headline": "Simpson deputy shot; suspect charged with attempted murder",
+    "src": "Bowling Green Daily News"
   },
   {
-    "headline": "Lose hour of sleep, gain hour of evening light for months",
-    "src": "WZVN-TV"
+    "headline": "2 Sisters Found a Year After They Disappeared, Family Friend Charged with Kidnapping",
+    "src": "People Magazine"
   },
   {
-    "headline": "Why daylight saving time can be bad for your health",
-    "src": "CNN"
+    "headline": "Two violent inmates on the loose after jumping out of van in New Mexico",
+    "src": "Fox News Latino"
   },
   {
-    "headline": "Teen Sisters Missing For Almost A Year Found In Upstate New York",
-    "src": "ABC15 Arizona"
-  },
-  {
-    "headline": "North Carolina's Congressional Primaries Are A Mess Because Of These Maps",
-    "src": "WAMU 88.5"
-  },
-  {
-    "headline": "GM to Acquire Autonomous-Vehicle Technology Developer",
-    "src": "Wall Street Journal"
+    "headline": "Prom, 'Pro-White' Rally Set for Same Day at Stone Mountain",
+    "src": "ABC News"
   },
   {
     "headline": "US Import Prices Fell 0.3% in February",
     "src": "Wall Street Journal"
   },
   {
-    "headline": "Yahoo CEO Marissa Mayer 'Would Love' to Keep Her Job",
-    "src": "Fortune"
+    "headline": "GM to Acquire Autonomous-Vehicle Technology Developer",
+    "src": "Wall Street Journal"
   },
   {
-    "headline": "Stocks Turn With Bonds and Euro as Draghi Plan Gets Second Look",
-    "src": "Bloomberg"
+    "headline": "Ford sets up new mobility services unit",
+    "src": "Reuters"
   },
   {
-    "headline": "US rebuts Apple claim on password reset in iPhone case",
-    "src": "Chicago Tribune"
+    "headline": "Wounded Warriors top execs ousted after financial review",
+    "src": "USA TODAY"
   },
   {
-    "headline": "The smaller iPhone SE could be a really big deal",
-    "src": "Macworld"
+    "headline": "Feds to Apple: You're not above the law in iPhone case",
+    "src": "CNET"
   },
   {
-    "headline": "Where to buy Samsung's Galaxy S7 and S7 Edge in the UK",
-    "src": "Engadget"
+    "headline": "Coming at Apple's March 21st event: 4-inch iPhone SE, 9.7-inch iPad Pro & new Apple Watch models",
+    "src": "9 to 5 Mac"
+  },
+  {
+    "headline": "Galaxy S7 & S7 Edge Outselling Their Predecessors In Europe",
+    "src": "Android Headlines - Android News"
   },
   {
     "headline": "Wikipedia For iOS Gets 3D Touch Support, Personalized Reading Options And More",
     "src": "Tech Times"
   },
   {
-    "headline": "'Captain America: Civil War' trailer: 5 takeaways",
-    "src": "KSDK.com"
+    "headline": "James Gunn Calls Tom Holland \"The Best\" Spider-Man, Praises \"Civil War\"",
+    "src": "Comic Book Resources"
   },
   {
     "headline": "Review: 'Blackbird': The Past Returns, Taunting",
     "src": "New York Times"
   },
   {
+    "headline": "Rebel Wilson thinks her drink was spiked at club",
+    "src": "Fox News"
+  },
+  {
     "headline": "A Gotham Girl! Ben McKenzie and Morena Baccarin Welcome a Daughter",
     "src": "People Magazine"
   },
   {
-    "headline": "RPT-US TV networks embrace 'binge-watching,' taking cue from Netflix",
-    "src": "Reuters"
-  },
-  {
     "headline": "Michigan, Ohio State Help NCAA Tournament Causes",
     "src": "ABC News"
+  },
+  {
+    "headline": "Bubble Watch: Some good news for Syracuse basketball's NCAA Tournament chances (March 11)",
+    "src": "Syracuse.com"
   },
   {
     "headline": "Did Vanderbilt play its way out of NCAA Tournament?",
@@ -116,40 +120,36 @@
     "src": "NCAA.com"
   },
   {
-    "headline": "Bubble Watch: Some good news for Syracuse basketball's NCAA Tournament chances (March 11)",
-    "src": "Syracuse.com"
-  },
-  {
-    "headline": "Kobe outscores LeBron; Ben Carson to endorse Donald Trump: Today's headlines (photos)",
-    "src": "cleveland.com"
-  },
-  {
-    "headline": "Brock Osweiler says he's excited to play in Texans' offense",
+    "headline": "Just like a Mamba: Kobe's last battle with LeBron true to form",
     "src": "ESPN"
+  },
+  {
+    "headline": "Where Do Denver Broncos Turn After Losing Brock Osweiler in Free Agency?",
+    "src": "Bleacher Report"
   },
   {
     "headline": "Oh look, Mt. DeMarcus Cousins erupted again",
     "src": "SB Nation"
   },
   {
-    "headline": "Heat-Bulls Preview",
-    "src": "CBSSports.com"
+    "headline": "Spieth sets out to try to make the cut at Valspar",
+    "src": "PGA.com"
+  },
+  {
+    "headline": "Plastic-eating bacteria could help make trash disappear",
+    "src": "CBS News"
   },
   {
     "headline": "NASA reveals stunning footage of this week's solar eclipse",
     "src": "BABW News"
   },
   {
-    "headline": "Researchers discover plastic-eating bacteria in recycling plant",
-    "src": "Christian Science Monitor"
+    "headline": "Close Comet Flyby Affected Mars' Magnetic Field",
+    "src": "ValueWalk"
   },
   {
     "headline": "No, Science Is Not Faith-Based",
     "src": "Forbes"
-  },
-  {
-    "headline": "Comet Siding Spring Flyby Wreaked Havoc On Mars Magnetic Field",
-    "src": "Tech Times"
   },
   {
     "headline": "Study: 3 federal laws could reduce gun deaths by more than 90%",
@@ -164,7 +164,7 @@
     "src": "Air Force Link"
   },
   {
-    "headline": "EBCC: Breast Density, Diabetes, and Physical Activity",
+    "headline": "Ultrasound Bests 3D Mammography for Ca Detection in Dense Breasts",
     "src": "MedPage Today"
   },
   {
@@ -172,15 +172,15 @@
     "src": "Reuters"
   },
   {
-    "headline": "As with Democrats, Republicans talk Cuba in South Florida debate",
-    "src": "MyPalmBeachPost"
+    "headline": "Hillary's Wall Street Speeches: The Bootleg Tapes",
+    "src": "Huffington Post"
   },
   {
-    "headline": "Republican debate: Candidates outline their paths to Cleveland",
-    "src": "CBS News"
+    "headline": "University of Miami GOP debate: T-shirts and cherry red T-birds",
+    "src": "Miami Herald"
   },
   {
-    "headline": "State Senate Split on Minimum Wage, Tax Cut Proposals",
-    "src": "TWC News"
+    "headline": "Obama diagnoses Trumpism: The president swats down the notion that Trump is somehow his fault",
+    "src": "Salon"
   }
 ]

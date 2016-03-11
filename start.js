@@ -27,11 +27,11 @@ function scrapeInOrder(cb) {
   console.log("Scraping data...");
   getHistory(function(dataHistory) {
     getWord(function(dataWord) {
-      getEtomology((function(dataEtomology) {
+      getetymology((function(dataetymology) {
         getWeather(function(dataWeather) {
           getFact(function(dataFact) {
             getNews(function(dataNews) {
-              buildHtml(dataHistory, dataWord, dataEtomology, dataWeather, dataFact, dataNews, cb);
+              buildHtml(dataHistory, dataWord, dataetymology, dataWeather, dataFact, dataNews, cb);
             });
           });
         });
@@ -80,13 +80,32 @@ function getWord(cb) {
 }
 
 
-// ---- Get Word Etomology Data ---- //
-function getEtomology(cb, word) {
-  var url = "http://www.etymonline.com/index.php?allowed_in_frame=0&search=" + word[0].word.replace(" ", "+");
-  var data = "data/etomology.json";
-  x(url, '#dictionary', [{
-    etomology: 'dd.highlight'
+// ---- Get Google Word Data ---- // // --- Careful with this scrape.. it's Google
+function getGoogleWord(cb, word) {
+  var url = "https://www.google.com/search?q=define%20" + word;
+  var data = "data/googleWord.json";
+  x(url, 'div.lr_container.mod', [{
+    origin: '#lr_dct_img_origin_' + word + '0@src',
+    type: '#lr_dct_img_use@src'
   }])(function(err, obj) {
+    fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
+      fs.readFile(data, function(err, result) {
+        cb(JSON.parse(result));
+      });
+    });
+  });
+}
+
+
+// ---- Get Word etymology Data ---- //
+function getetymology(cb, word) {
+  var url = "http://www.etymonline.com/index.php?allowed_in_frame=0&search=" + word[0].word.replace(" ", "+");
+  var data = "data/etymology.json";
+  x(url, '#dictionary', [{
+    etymology: 'dd.highlight'
+  }])(function(err, obj) {
+    if (obj=='') {obj = [{etymology: 'No etymology found'}];}
+    console.log(err + "-----" + obj);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -150,7 +169,7 @@ function getNews(cb) {
 
 
 // ---- Build HTML File ---- //
-function buildHtml(history, word, etomology, weather, fact, news, cb) {
+function buildHtml(history, word, etymology, weather, fact, news, cb) {
 
   var head = `
   <head>
@@ -230,13 +249,13 @@ function buildHtml(history, word, etomology, weather, fact, news, cb) {
        htmlWord += `
         <p>${word[0].def1}</p>
         <p>${word[0].def2}</p>
-        <p class="etom">${etomology[0].etomology}</p>
+        <p class="etom">${etymology[0].etymology}</p>
        </div>`;
      } else {
        htmlWord += `
        <p>
        <strong>1</strong>${word[0].def1}</p>
-       <p class="etom">${etomology[0].etomology}</p>
+       <p class="etom">${etymology[0].etymology}</p>
        </div>
        `;
      }
