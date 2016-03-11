@@ -11,14 +11,24 @@ p {
   line-height: 1.2em;
 }
 .row {
-  margin: 13px 0;
+  margin: 15px 0;
 }
-.date {
+.date, .day {
+  position: absolute;
+  display: inline-block;
   font-family: Verdana;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 10px;
   font-size: 11px;
+}
+.date {
+  bottom: 0px;
+  right: 5px;
+  text-align: right;
+}
+.day {
+  left: 14px;
 }
 .col-xs-6 .col-xs-12 {
   margin-bottom: 20px;
@@ -60,6 +70,9 @@ h5 {
 }
 .well .row {
   margin: 0;
+}
+.weather {
+  padding: 15px;
 }
 .year {
   font-size: 165%;
@@ -121,11 +134,18 @@ h5 {
 .QA p:first-of-type {
   font-family: cursive;
 }
-.back-img {
+#whiteout {
   position: absolute;
   z-index: -1;
   top: 0;
   left: 0;
+  width: 100%;
+  height:100%;
+}
+.mast {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 @media print {
   body {
@@ -136,5 +156,8 @@ h5 {
   }
   * {
     -webkit-print-color-adjust: exact;
+  }
+  .container {
+    width: 100% !important;
   }
 }

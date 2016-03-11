@@ -17,7 +17,9 @@ var x = Xray(); //.driver(phantom());
 var printFile = 'print.html';
 var d = new Date();
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var today = monthNames[d.getMonth()] + " " + d.getUTCDate();
+var day = dayNames[d.getDay()];
 
 
 // ---- Helper Fuctions ---- //
@@ -220,20 +222,11 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
   </head>
   `,
     header = `
-  <div class="row">
+    <img src="assets/blank.png" id="whiteout">
+  <div class="row mast">
     <div class="col-xs-12">
       <img src="assets/urinal-logo.png" />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-4">
-      <hr>
-    </div>
-    <div class="col-xs-4 date">
-      <span>${today}</span>
-    </div>
-    <div class="col-xs-4">
-      <hr>
+      <div class="date"><span>${day}, ${today}</span></div>
     </div>
   </div>
   `;
@@ -259,7 +252,7 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
      ============================== */
   var htmlWeather = `
      <h3>WEATHER</h3>
-     <div class="well">
+     <div class="well weather">
        <div class="row">
          <div class="col-xs-6">
            <h5>today</h5>
