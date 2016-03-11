@@ -40,7 +40,7 @@ Thumbs.db
 
 # project files      #
 ######################
-node_modules
 index-v1.js
 print.html
-!node_modules/x-ray-crawler/**/*
+node_modules/**
+!node_modules/x-ray-crawler
