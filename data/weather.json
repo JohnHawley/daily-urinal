@@ -1,0 +1,22 @@
+[
+  {
+    "temp": "41°",
+    "desc": "Mostly cloudy",
+    "feel": "RealFeel® 40°"
+  },
+  {
+    "temp": "52°",
+    "desc": "Mostly sunny and beautiful.",
+    "feel": "RealFeel 56°"
+  },
+  {
+    "temp": "41°",
+    "desc": "Increasing clouds.",
+    "feel": "RealFeel 39°"
+  },
+  {
+    "temp": "57°",
+    "desc": "A stray afternoon shower.",
+    "feel": "RealFeel 57°"
+  }
+]
