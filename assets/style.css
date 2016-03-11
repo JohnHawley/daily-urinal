@@ -1,5 +1,8 @@
 body {
   font-family: 'Open Sans' Helvetica, Arial, sans-serif;
+  background-image: url("blank.gif");
+  background-repeat: repeat;
+  -webkit-print-color-adjust: exact !important;
 }
 img {
   width: 100%;
@@ -8,7 +11,7 @@ p {
   line-height: 1.2em;
 }
 .row {
-  margin: 20px 0;
+  margin: 13px 0;
 }
 .date {
   font-family: Verdana;
@@ -50,6 +53,10 @@ h5 {
   margin: 0;
   line-height: 21px;
   text-align: center;
+  background: transparent !important;
+}
+.well p:last-of-type {
+  margin: 0;
 }
 .well .row {
   margin: 0;
@@ -103,4 +110,31 @@ h5 {
 }
 .etom {
   text-align: left;
+}
+.QA p:last-of-type {
+  text-align: left;
+  line-height: 1.45em;
+  font-weight: 200;
+  font-size: 12px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.QA p:first-of-type {
+  font-family: cursive;
+}
+.back-img {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+@media print {
+  body {
+    background-color: #fff !important;
+    background-image: url("blank.gif") !important;
+    background-repeat: repeat !important;
+    -webkit-print-color-adjust: exact;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+  }
 }

@@ -10,6 +10,7 @@
   "author": "John Hawley",
   "license": "MIT",
   "dependencies": {
-    "x-ray": "^2.0.3"
+    "x-ray": "^2.0.3",
+    "x-ray-phantom": "^1.0.1"
   }
 }

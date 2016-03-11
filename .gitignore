@@ -40,7 +40,7 @@ Thumbs.db
 
 # project files      #
 ######################
-node_modules
+#node_modules
 index-v1.js
-#data/*.json
-#print.html
+data/*.json
+print.html

@@ -1,22 +1,22 @@
 [
   {
-    "temp": "42°",
+    "temp": "44°",
     "desc": "Clouds and sun",
-    "feel": "RealFeel® 44°"
+    "feel": "RealFeel® 50°"
   },
   {
-    "temp": "52°",
+    "temp": "46°",
     "desc": "Mostly sunny and beautiful.",
-    "feel": "RealFeel 56°"
+    "feel": "RealFeel 48°"
   },
   {
-    "temp": "41°",
+    "temp": "40°",
     "desc": "Increasing clouds.",
-    "feel": "RealFeel 40°"
+    "feel": "RealFeel 38°"
   },
   {
     "temp": "57°",
-    "desc": "A stray afternoon shower.",
-    "feel": "RealFeel 57°"
+    "desc": "Mostly cloudy and mild.",
+    "feel": "RealFeel 59°"
   }
 ]
