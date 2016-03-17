@@ -59,7 +59,7 @@ function getHistory(cb) {
     excrept1: 'article.article p:nth-child(1)',
     excrept2: 'article.article p:nth-child(2)'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[History]" + err);
     //obj[0].excrept1 = obj[0].excrept1.substring(0, obj[0].excrept1.indexOf('.'));
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
@@ -81,7 +81,7 @@ function getWord(cb) {
     def1: '.wod-definition-container p:nth-child(2)',
     def2: '.wod-definition-container p:nth-child(3)',
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[Word]" + err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -98,7 +98,7 @@ function getGoogleWord(cb, word) {
   x(url, '#lfoot', [{
     origin: 'script@html'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log(["[Google Word]"] + err);
     if (obj == '') {
       obj = [{
         origin: 'Nothing found'
@@ -127,7 +127,7 @@ function getEtymology(cb, word) {
   x(url, '#dictionary', [{
     etymology: 'dd.highlight'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[Etomology]"+err);
     if (obj == '') {
       obj = [{
         etymology: 'No etymology found'
@@ -151,7 +151,7 @@ function getWeather(cb) {
     desc: '.info span.cond',
     feel: '.info span.realfeel'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[Weather]"+err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -168,7 +168,7 @@ function getJoke(cb) {
   x(url, '#pnl-jokeoftheday', [{
     joke: '.pnl-joke@html'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[Joke]"+err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -186,7 +186,7 @@ function getNews(cb) {
     headline: 'h2.esc-lead-article-title',
     src: '.al-attribution-cell.source-cell'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[News]"+err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -203,7 +203,7 @@ function getGoogleQA(cb) {
     q: '._cNh',
     a: '._dNh'
   }])(function(err, obj) {
-    if (err) console.log(err);
+    if (err) console.log("[Google QA]"+err);
     if (obj == '') {
       obj = [{
         q: 'Nothing found',
