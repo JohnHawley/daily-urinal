@@ -10,6 +10,7 @@ var exec = require('child_process').exec;
 
 // ---- Options ---- //
 var factOn = true;
+var jokeOn = true;
 
 
 // ---- Globals  ---- //
@@ -33,10 +34,10 @@ function scrapeInOrder(cb) {
       getEtymology((function(dataEtymology) {
         getGoogleWord((function(dataGoogleWord) {
           getWeather(function(dataWeather) {
-            getFact(function(dataFact) {
+            getJoke(function(dataJoke) {
               getNews(function(dataNews) {
                 getGoogleQA(function(dataQA) {
-                  buildHtml(dataHistory, dataWord, dataEtymology, dataGoogleWord, dataWeather, dataFact, dataNews, dataQA, cb);
+                  buildHtml(dataHistory, dataWord, dataEtymology, dataGoogleWord, dataWeather, dataJoke, dataNews, dataQA, cb);
                 });
               });
             });
@@ -58,7 +59,8 @@ function getHistory(cb) {
     excrept1: 'article.article p:nth-child(1)',
     excrept2: 'article.article p:nth-child(2)'
   }])(function(err, obj) {
-    obj[0].excrept1 = obj[0].excrept1.substring(0, obj[0].excrept1.indexOf('.'));
+    if (err) console.log(err);
+    //obj[0].excrept1 = obj[0].excrept1.substring(0, obj[0].excrept1.indexOf('.'));
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -79,6 +81,7 @@ function getWord(cb) {
     def1: '.wod-definition-container p:nth-child(2)',
     def2: '.wod-definition-container p:nth-child(3)',
   }])(function(err, obj) {
+    if (err) console.log(err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -95,6 +98,7 @@ function getGoogleWord(cb, word) {
   x(url, '#lfoot', [{
     origin: 'script@html'
   }])(function(err, obj) {
+    if (err) console.log(err);
     if (obj == '') {
       obj = [{
         origin: 'Nothing found'
@@ -123,6 +127,7 @@ function getEtymology(cb, word) {
   x(url, '#dictionary', [{
     etymology: 'dd.highlight'
   }])(function(err, obj) {
+    if (err) console.log(err);
     if (obj == '') {
       obj = [{
         etymology: 'No etymology found'
@@ -146,6 +151,7 @@ function getWeather(cb) {
     desc: '.info span.cond',
     feel: '.info span.realfeel'
   }])(function(err, obj) {
+    if (err) console.log(err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -155,14 +161,14 @@ function getWeather(cb) {
 }
 
 
-// ---- Get Fact Data ---- //
-function getFact(cb) {
-  var url = "https://www.beagreatteacher.com/daily-fun-fact/";
-  var data = "data/fact.json";
-  x(url, 'main', [{
-    fact: 'p:nth-child(7)',
-    joke: 'p:nth-child(5)'
+// ---- Get JOKE Data ---- //
+function getJoke(cb) {
+  var url = "http://www.ajokeaday.com";
+  var data = "data/joke.json";
+  x(url, '#pnl-jokeoftheday', [{
+    joke: '.pnl-joke@html'
   }])(function(err, obj) {
+    if (err) console.log(err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -180,6 +186,7 @@ function getNews(cb) {
     headline: 'h2.esc-lead-article-title',
     src: '.al-attribution-cell.source-cell'
   }])(function(err, obj) {
+    if (err) console.log(err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -196,6 +203,7 @@ function getGoogleQA(cb) {
     q: '._cNh',
     a: '._dNh'
   }])(function(err, obj) {
+    if (err) console.log(err);
     if (obj == '') {
       obj = [{
         q: 'Nothing found',
@@ -213,7 +221,7 @@ function getGoogleQA(cb) {
 
 
 // ---- Build HTML File ---- //
-function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa, cb) {
+function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa, cb) {
 
   var head = `
   <head>
@@ -277,12 +285,14 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
     htmlEtymology = `
            <p>${word[0].def1}</p>
            <p>${word[0].def2}</p>
+           <hr>
            <p class="etom">${etymology[0].etymology}</p>
            `;
   } else {
     htmlEtymology = `
           <p>
           <strong>1</strong>${word[0].def1}</p>
+          <hr>
           <p class="etom">${etymology[0].etymology}</p>
           `;
   }
@@ -295,7 +305,7 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
         ${word[0].pro}
        <hr style="margin:10px 0;">
         ${htmlEtymology}
-        <p style="margin:0;">
+        <p style="margin:10px 0;">
           <img src="${googleWord[0].origin}" style="width:100%;"/>
         </p>
         <p>
@@ -305,21 +315,20 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
      `;
 
 
+
+
   /* ==============================
-     =        BUILD Fact         =
+     =        BUILD Joke        =
      ============================== */
-  if (factOn) {
-    var htmlFact = `
+
+    var htmlJoke = `
       <div class="col-xs-12">
-        <h3>RANDOM FACT</h3>
+        <h3>TODAY'S JOKE</h3>
         <div class="well fact">
-         <p>${fact[0].fact}</p>
+        ${joke[0].joke}
         </div>
       </div>
       `;
-  } else {
-    var htmlFact = '';
-  }
 
 
   /* ==============================
@@ -330,7 +339,7 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
      <div class="well news">
      `;
   for (var i = 0;
-    ((i < news.length) && (i < 3)); i++) {
+    ((i < news.length) && (i < 4)); i++) {
     var story = news[i];
     htmlNews += `
          <div>${story.headline}</div>
@@ -348,7 +357,8 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
       <div class="col-xs-12">
         <h3>TODAY'S Q&A</h3>
         <div class="well QA">
-         <p>${qa[0].q}</p>
+         <p><strong>${qa[0].q}</strong></p>
+         <hr>
          <p>${qa[0].a}</p>
         </div>
       </div>
@@ -378,6 +388,7 @@ function buildHtml(history, word, etymology, googleWord, weather, fact, news, qa
           <div class="col-xs-12">
             ${htmlWord}
           </div>
+          ${htmlJoke}
 
         </div>
       </div>
