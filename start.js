@@ -295,7 +295,8 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
   }
 
   var showOrigin = '';
-  if (googleWord[0].origin != 'none') showOrgin =  `<img src="${googleWord[0].origin}" style="width: auto;max-width:100% !important;"/>`;
+
+  if (googleWord[0].origin != 'none') showOrigin =  `<img src="${googleWord[0].origin}" style="width: auto;max-width:100% !important;"/>`;
 
   var htmlWord = `
      <h3>Word of the day</h3>
