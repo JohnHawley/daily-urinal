@@ -106,8 +106,8 @@ function getGoogleWord(cb, word) {
     }
     if (matches[0] == undefined) matches[0] = 'none';
     if (matches[1] == undefined) matches[1] = 'none';
-    obj[0].history = matches[0].replace('\\075', '=').replace('\\75', '=');
-    obj[0].origin = matches[1].replace('\\075', '=').replace('\\75', '=');
+    obj[0].origin = matches[0].replace('\\075', '=').replace('\\75', '=');
+    obj[0].history = matches[1].replace('\\075', '=').replace('\\75', '=');
     fs.writeFile(data, JSON.stringify(obj, null, 2), "ascii", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -295,7 +295,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
   }
 
   var showOrigin = '';
-  if (googleWord[0].origin != 'none') showOrgin =  `<img src="${googleWord[0].origin}" style="width:100%;"/>`;
+  if (googleWord[0].origin != 'none') showOrgin =  `<img src="${googleWord[0].origin}" style="width: auto;max-width:100% !important;"/>`;
 
   var htmlWord = `
      <h3>Word of the day</h3>
@@ -309,7 +309,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
           ${showOrigin}
         </p>
         <p>
-          <img src="${googleWord[0].history}" style="width:100%;"/>
+          <img src="${googleWord[0].history}" style="width: auto;max-width:100% !important;"/>
         </p>
        </div>
      `;
