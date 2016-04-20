@@ -10,25 +10,32 @@ img {
 p {
   line-height: 1.2em;
 }
+.container {
+ padding:0;
+}
 .row {
   margin: 15px 0;
 }
-.date, .day {
-  position: absolute;
-  display: inline-block;
+.logo-header {
+  padding: 0;
+  text-align: center;
+  padding-bottom: 9px;
+}
+.date {
   font-family: Verdana;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: 6px;
   font-size: 11px;
-}
-.date {
-  bottom: 0px;
-  right: 5px;
-  text-align: right;
 }
 .day {
   left: 14px;
+}
+.col-xs-6.left {
+ padding-left: 0;
+}
+.col-xs-6.right {
+ padding-right: 0;
 }
 .col-xs-6 .col-xs-12 {
   margin-bottom: 20px;
@@ -60,6 +67,7 @@ h5 {
 }
 .well {
   /*min-height: 180px;*/
+  padding: 16px;
   margin: 0;
   line-height: 21px;
   text-align: center;
@@ -72,7 +80,17 @@ h5 {
   margin: 0;
 }
 .weather {
-  padding: 15px;
+  padding: 15px 5px;
+}
+.weather .col-xs-4 {
+  padding: 0 2.5px;
+}
+.weather .col-xs-4 h5 {
+  text-transform: lowercase;
+}
+.weather .col-xs-4 p {
+  font-size: 12px;
+  font-weight: 300;
 }
 .year {
   font-size: 165%;
@@ -86,6 +104,7 @@ h5 {
 }
 .excrept {
   text-align: left;
+  font-size: 12px;
 }
 .fact {
   text-align: center;
@@ -97,24 +116,23 @@ h5 {
 .news {
   text-align: left;
 }
-.news div {
+.news h2 {
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #000;
+  margin:0;
   font-family: georgia;
   line-height: 1.1em;
-  font-size: 109%;
-  margin-bottom: 5px;
+  font-size: 19px;
+  margin-bottom: 10px;
 }
 .news p {
-  font-family: helvetica;
+  font-family: Times New Roman;
+  text-align: justify;
   line-height: 1.1em;
   font-size: 93%;
-  text-transform: uppercase;
-}
-.news p {
-  border-bottom: 1px dotted #000;
   padding-bottom: 10px;
   margin-bottom: 10px;
   font-weight: 100;
-  letter-spacing: 2px;
 }
 .news p:last-of-type {
   border: none;
@@ -126,13 +144,18 @@ h5 {
 }
 .QA p:last-of-type {
   text-align: left;
-  line-height: 1.45em;
+  line-height: 1.2em;
   font-weight: 200;
   font-size: 12px;
   font-family: Helvetica, Arial, sans-serif;
+  margin:0 0 6px;
 }
 .QA p:first-of-type {
   font-family: cursive;
+  letter-spacing: 0.25px;
+}
+.QA hr {
+  margin: 5px 0;
 }
 #whiteout {
   position: absolute;
@@ -144,8 +167,8 @@ h5 {
 }
 .mast {
   position: relative;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 @media print {
   body {

@@ -15,6 +15,7 @@ var jokeOn = true;
 
 // ---- Globals  ---- //
 var x = Xray(); //.driver(phantom());
+
 var printFile = 'print.html';
 var d = new Date();
 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -74,6 +75,13 @@ function getHistory(cb) {
 function getWord(cb) {
   var url = "http://www.merriam-webster.com/word-of-the-day";
   var data = "data/word.json";
+  var ovride = [{
+    word: 'contretemps',
+    type: 'noun',
+    pro: 'kon-truh-tahn',
+    def1: 'an inopportune occurrence; an embarrassing mischance',
+    def2: ''
+  }];
   x(url, 'div.main-wrapper', [{
     word: 'h1',
     type: '.word-attributes .main-attr',
@@ -98,7 +106,10 @@ function getGoogleWord(cb, word) {
   x(url, '#lfoot', [{
     origin: 'script@html'
   }])(function(err, obj) {
-    if (err) console.log(["[Google Word]"] + err);
+    if (err) {
+      console.log(["[Google Word]"] + err);
+      obj = [{origin:"Blocked By Google"}];
+    }
     var regex = /\_image\_src\=\'(.*?)\'\;/g,
       item, matches = [];
     while (item = regex.exec(obj[0].origin)) {
@@ -106,8 +117,8 @@ function getGoogleWord(cb, word) {
     }
     if (matches[0] == undefined) matches[0] = 'none';
     if (matches[1] == undefined) matches[1] = 'none';
-    obj[0].origin = matches[0].replace('\\075', '=').replace('\\75', '=');
-    obj[0].history = matches[1].replace('\\075', '=').replace('\\75', '=');
+    obj[0].origin = matches[0].replace('\\075', '=').replace('\\75', '=').replace('\\x3d', '=').replace('\\x3d', '=');
+    obj[0].history = matches[1].replace('\\075', '=').replace('\\75', '=').replace('\\x3d', '=').replace('\\x3d', '=');
     fs.writeFile(data, JSON.stringify(obj, null, 2), "ascii", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -140,13 +151,31 @@ function getEtymology(cb, word) {
 
 
 // ---- Get Weather Data ---- //
-function getWeather(cb) {
+/*function getWeather(cb) {
   var url = "http://www.accuweather.com/en/us/chicago-il/60608/weather-forecast/348308";
   var data = "data/weather.json";
   x(url, '#forecast-feed-3day-sponsor ul li', [{
     temp: '.info strong.temp',
     desc: '.info span.cond',
     feel: '.info span.realfeel'
+  }])(function(err, obj) {
+    if (err) console.log("[Weather]"+err);
+    fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
+      fs.readFile(data, function(err, result) {
+        cb(JSON.parse(result));
+      });
+    });
+  });
+*/
+
+// ---- Get Weather Data V2---- //
+function getWeather(cb) {
+  var url = "http://www.accuweather.com/en/us/chicago-il/60608/daily-weather-forecast/348308";
+  var data = "data/weather.json";
+  x(url, '#feed-tabs ul li.day', [{
+    day: 'h3 a',
+    temp: '.info strong.temp',
+    desc: '.info span.cond'
   }])(function(err, obj) {
     if (err) console.log("[Weather]"+err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
@@ -175,13 +204,29 @@ function getJoke(cb) {
 }
 
 
-// ---- Get News Data ---- //
+/*// ---- Get News Data ---- //
 function getNews(cb) {
   var url = "https://news.google.com/";
   var data = "data/news.json";
   x(url, '.blended-wrapper', [{
     headline: 'h2.esc-lead-article-title',
     src: '.al-attribution-cell.source-cell'
+  }])(function(err, obj) {
+    if (err) console.log("[News]"+err);
+    fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
+      fs.readFile(data, function(err, result) {
+        cb(JSON.parse(result));
+      });
+    });
+  });
+}*/
+// ---- Get News Data ---- //
+function getNews(cb) {
+  var url = "http://bigstory.ap.org/";
+  var data = "data/news.json";
+  x(url, '#boxes-box-homepage_curated .container-column1-column2 .article', [{
+    headline: 'h5',
+    blurb: 'p'
   }])(function(err, obj) {
     if (err) console.log("[News]"+err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
@@ -203,8 +248,8 @@ function getGoogleQA(cb) {
     if (err) console.log("[Google QA]"+err);
     if (obj == '') {
       obj = [{
-        q: 'Nothing found',
-        a: 'Nothing found'
+        q: 'Blocked by Google',
+        a: 'Blocked by Google'
       }];
     }
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
@@ -229,11 +274,21 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
     header = `
     <img src="assets/blank.png" id="whiteout">
   <div class="row mast">
-    <div class="col-xs-12">
+    <div class="col-xs-12 logo-header">
       <img src="assets/urinal-logo.png" />
-      <div class="date"><span>${day}, ${today}</span></div>
     </div>
+      <div class="col-xs-3">
+        <hr>
+      </div>
+      <div class="col-xs-6 date">
+        <span>${day}, ${today}</span>
+      </div>
+      <div class="col-xs-3">
+        <hr>
+      </div>
   </div>
+
+
   `;
 
   /* ==============================
@@ -255,7 +310,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
   /* ==============================
      =        BUILD WEATHER       =
      ============================== */
-  var htmlWeather = `
+  /*var htmlWeather = `
      <h3>WEATHER</h3>
      <div class="well weather">
        <div class="row">
@@ -268,6 +323,32 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
            <h5>tomorrow</h5>
            <h2>${weather[3].temp}</h2>
            <p>${weather[3].desc}</p>
+         </div>
+       </div>
+     </div>
+     `;*/
+
+  /* ==============================
+     =        BUILD WEATHER       =
+     ============================== */
+  var htmlWeather = `
+     <h3>WEATHER</h3>
+     <div class="well weather">
+       <div class="row">
+         <div class="col-xs-4">
+           <h5>${weather[0].day}</h5>
+           <h2>${weather[0].temp}</h2>
+           <p>${weather[0].desc}</p>
+         </div>
+         <div class="col-xs-4">
+           <h5>tomorrow</h5>
+           <h2>${weather[1].temp}</h2>
+           <p>${weather[1].desc}</p>
+         </div>
+         <div class="col-xs-4">
+           <h5>${weather[2].day}</h5>
+           <h2>${weather[2].temp}</h2>
+           <p>${weather[2].desc}</p>
          </div>
        </div>
      </div>
@@ -336,17 +417,21 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
      =        BUILD News          =
      ============================== */
   var htmlNews = `
-     <h3>Headlines</h3>
+     <h3>Big Story</h3>
      <div class="well news">
      `;
-  for (var i = 0;
+  /*for (var i = 0;
     ((i < news.length) && (i < 4)); i++) {
     var story = news[i];
     htmlNews += `
-         <div>${story.headline}</div>
-         <p>${story.src}</p>
+         <h2>${story[0].headline}</h2>
+         <p>${story[0].blurb}</p>
        `
-  }
+  }*/
+  htmlNews += `
+       <h2>${news[0].headline}</h2>
+       <p>${news[0].blurb}</p>
+     `;
   htmlNews += "</div>";
 
 
@@ -373,7 +458,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
   var body = `
       ${header}
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 left">
           <div class="col-xs-12">
             ${htmlNews}
           </div>
@@ -381,16 +466,15 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
             ${htmlHistory}
           </div>
           ${htmlFact}
+          ${htmlJoke}
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 right">
           <div class="col-xs-12">
             ${htmlWeather}
           </div>
           <div class="col-xs-12">
             ${htmlWord}
           </div>
-          ${htmlJoke}
-
         </div>
       </div>
       `
