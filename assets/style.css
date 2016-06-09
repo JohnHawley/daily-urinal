@@ -106,11 +106,18 @@ h5 {
   text-align: left;
   font-size: 12px;
 }
-.fact {
+.joke {
   text-align: center;
   font-size: 16px;
 }
-.fact p {
+.joke p {
+  margin: 0;
+}
+.til {
+  text-align: left;
+  font-size: 14px;
+}
+.til p {
   margin: 0;
 }
 .news {

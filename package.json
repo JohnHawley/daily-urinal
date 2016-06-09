@@ -10,7 +10,9 @@
   "author": "John Hawley",
   "license": "MIT",
   "dependencies": {
+    "feedparser": "^1.1.4",
     "x-ray": "^2.0.3",
-    "x-ray-phantom": "^1.0.1"
+    "x-ray-phantom": "^1.0.1",
+    "xml2js": "^0.4.16"
   }
 }

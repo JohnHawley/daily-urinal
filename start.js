@@ -72,43 +72,113 @@ function getHistory(cb) {
 
 
 // ---- Get Word Data ---- //
+// function getWord(cb) {
+//   var url = "http://www.merriam-webster.com/word-of-the-day";
+//   var data = "data/word.json";
+//   var ovride = [{
+//     word: 'contretemps',
+//     type: 'noun',
+//     pro: 'kon-truh-tahn',
+//     def1: 'an inopportune occurrence; an embarrassing mischance',
+//     def2: ''
+//   }];
+//   x(url, 'div.main-wrapper', [{
+//     word: 'h1',
+//     type: '.word-attributes .main-attr',
+//     pro: '.word-attributes .word-syllables',
+//     def1: '.wod-definition-container p:nth-child(2)',
+//     def2: '.wod-definition-container p:nth-child(3)',
+//   }])(function(err, obj) {
+//     if (err) console.log("[Word]" + err);
+//     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
+//       fs.readFile(data, function(err, result) {
+//         cb(JSON.parse(result));
+//       });
+//     });
+//   });
+// }
 function getWord(cb) {
-  var url = "http://www.merriam-webster.com/word-of-the-day";
+  var url = "http://www.dictionary.com/wordoftheday/";
   var data = "data/word.json";
-  var ovride = [{
-    word: 'contretemps',
-    type: 'noun',
-    pro: 'kon-truh-tahn',
-    def1: 'an inopportune occurrence; an embarrassing mischance',
-    def2: ''
-  }];
-  x(url, 'div.main-wrapper', [{
-    word: 'h1',
-    type: '.word-attributes .main-attr',
-    pro: '.word-attributes .word-syllables',
-    def1: '.wod-definition-container p:nth-child(2)',
-    def2: '.wod-definition-container p:nth-child(3)',
+  x(url, "#chunk-0", [{
+    word: '[data-word]@data-word',
+    // type: '.word-attributes .main-attr',
+    // pro: '.word-attributes .word-syllables',
+    // def1: '.wod-definition-container p:nth-child(2)',
+    // def2: '.wod-definition-container p:nth-child(3)',
   }])(function(err, obj) {
     if (err) console.log("[Word]" + err);
-    fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
-      fs.readFile(data, function(err, result) {
-        cb(JSON.parse(result));
+    var url2 = "http://www.merriam-webster.com/dictionary/" + obj[0].word;
+    x(url2, 'div.main-wrapper', [{
+      type: '.word-attributes .main-attr',
+      pro: '.word-attributes .word-syllables',
+      def1: 'div.tense-box li:nth-child(1)',
+      def2: 'div.tense-box li:nth-child(2)',
+    }])(function(err, obj2) {
+      if (err) console.log("[Word]" + err);
+      obj2[0].word = obj[0].word;
+      fs.writeFile(data, JSON.stringify(obj2, null, 2), "utf-8", function(err) {
+        fs.readFile(data, function(err, result) {
+          cb(JSON.parse(result));
+        });
       });
     });
   });
 }
 
 
+
 // ---- Get Google Word Data ---- // // --- Careful with this scrape.. it's Google
-function getGoogleWord(cb, word) {
-  var url = "https://www.google.com/search?q=define+" + word[0].word;
+// function getGoogleWord(cb, theword) {
+//   //console.log("Right? ---> "+ theword[0].word);
+//   var url = "https://www.google.com/search?q=define+" + theword[0].word;
+//   var data = "data/googleWord.json";
+//   x(url, "#gsr", [{
+//      origin: 'div#lfoot > script@html',
+//      type: '#uid_0 div.lr_dct_sf_h',
+//      pro: '#uid_0 span.lr_dct_ph',
+//      def1: '#uid_0 div.lr_dct_sf_sen',
+//     // def2: '.wod-definition-container p:nth-child(3)',
+//   }])(function(err, obj) {
+//     if (err) {
+//       console.log(["[Google Word]"] + err);
+//       // obj = [{
+//       //   origin: "Blocked By Google"
+//       // }];
+//     }
+//     console.log(obj);
+//     console.log(obj[0]);
+//     console.log(obj[0].type);
+//     // var regex = /\_image\_src\=\'(.*?)\'\;/g,
+//     //   item, matches = [];
+//     // while (item = regex.exec(obj[0].origin)) {
+//     //   matches.push(item[1]);
+//     // }
+//     // if (matches[0] == undefined) matches[0] = 'none';
+//     // if (matches[1] == undefined) matches[1] = 'none';
+//     // obj[0].origin = matches[0].replace('\\075', '=').replace('\\75', '=').replace('\\x3d', '=').replace('\\x3d', '=');
+//     // obj[0].history = matches[1].replace('\\075', '=').replace('\\75', '=').replace('\\x3d', '=').replace('\\x3d', '=');
+//     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
+//       if (err) {console.log("[1]: "+ err);}
+//       fs.readFile(data, function(err, result) {
+//         if (err) {console.log("[2]: "+ err);}
+//         cb(JSON.parse(result));
+//       });
+//     });
+//   });
+// }
+
+function getGoogleWord(cb, theword) {
+  var url = "https://www.google.com/search?q=define+" + theword[0].word;
   var data = "data/googleWord.json";
   x(url, '#lfoot', [{
     origin: 'script@html'
   }])(function(err, obj) {
     if (err) {
       console.log(["[Google Word]"] + err);
-      obj = [{origin:"Blocked By Google"}];
+      obj = [{
+        origin: "Blocked By Google"
+      }];
     }
     var regex = /\_image\_src\=\'(.*?)\'\;/g,
       item, matches = [];
@@ -135,7 +205,7 @@ function getEtymology(cb, word) {
   x(url, '#dictionary', [{
     etymology: 'dd.highlight'
   }])(function(err, obj) {
-    if (err) console.log("[Etomology]"+err);
+    if (err) console.log("[Etomology]" + err);
     if (obj == '') {
       obj = [{
         etymology: 'No etymology found'
@@ -177,7 +247,7 @@ function getWeather(cb) {
     temp: '.info strong.temp',
     desc: '.info span.cond'
   }])(function(err, obj) {
-    if (err) console.log("[Weather]"+err);
+    if (err) console.log("[Weather]" + err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -194,7 +264,7 @@ function getJoke(cb) {
   x(url, '#pnl-jokeoftheday', [{
     joke: '.pnl-joke@html'
   }])(function(err, obj) {
-    if (err) console.log("[Joke]"+err);
+    if (err) console.log("[Joke]" + err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -228,7 +298,7 @@ function getNews(cb) {
     headline: 'h5',
     blurb: 'p'
   }])(function(err, obj) {
-    if (err) console.log("[News]"+err);
+    if (err) console.log("[News]" + err);
     fs.writeFile(data, JSON.stringify(obj, null, 2), "utf-8", function(err) {
       fs.readFile(data, function(err, result) {
         cb(JSON.parse(result));
@@ -245,7 +315,7 @@ function getGoogleQA(cb) {
     q: '._cNh',
     a: '._dNh'
   }])(function(err, obj) {
-    if (err) console.log("[Google QA]"+err);
+    if (err) console.log("[Google QA]" + err);
     if (obj == '') {
       obj = [{
         q: 'Blocked by Google',
@@ -369,7 +439,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
   } else {
     htmlEtymology = `
           <p>
-          <strong>1</strong>${word[0].def1}</p>
+          <strong>1: </strong>${word[0].def1}</p>
           <hr>
           <p class="etom">${etymology[0].etymology}</p>
           `;
@@ -377,7 +447,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
 
   var showOrigin = '';
 
-  if (googleWord[0].origin != 'none') showOrigin =  `<img src="${googleWord[0].origin}" style="width: auto;max-width:100% !important;"/>`;
+  if (googleWord[0].origin != 'none') showOrigin = `<img src="${googleWord[0].origin}" style="width: auto;max-width:100% !important;"/>`;
 
   var htmlWord = `
      <h3>Word of the day</h3>
@@ -403,11 +473,36 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
      =        BUILD Joke        =
      ============================== */
 
-    var htmlJoke = `
+  /*  var htmlJoke = `
       <div class="col-xs-12">
         <h3>TODAY'S JOKE</h3>
         <div class="well fact">
         ${joke[0].joke}
+        </div>
+      </div>
+      `;*/
+  var htmlJoke = `
+      <div class="col-xs-12">
+        <h3>TODAY'S JOKE</h3>
+        <div class="well joke">
+        <p>Joke</p>
+        <br>
+        <p>Punchline</p>
+        </div>
+      </div>
+      `;
+
+
+  /* ==============================
+     =        BUILD Til        =
+     ============================== */
+
+
+  var htmlTil = `
+      <div class="col-xs-12">
+        <h3>TODAY I LEARNED</h3>
+        <div class="well til">
+          <p><strong>TIL </strong> Insert stuff here</p>
         </div>
       </div>
       `;
@@ -439,7 +534,7 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
      =        BUILD Q&A         =
      ============================== */
 
-    var htmlFact = `
+  var htmlFact = `
       <div class="col-xs-12">
         <h3>TODAY'S Q&A</h3>
         <div class="well QA">
@@ -474,6 +569,9 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
           </div>
           <div class="col-xs-12">
             ${htmlWord}
+          </div>
+          <div class="col-xs-12">
+            ${htmlTil}
           </div>
         </div>
       </div>
