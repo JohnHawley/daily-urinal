@@ -100,6 +100,13 @@ function getHistory(cb) {
 function getWord(cb) {
   var url = "http://www.dictionary.com/wordoftheday/";
   var data = "data/word.json";
+  var ovride = [{
+      word: 'contretemps',
+      type: 'noun',
+      pro: 'kon-truh-tahn',
+      def1: 'an inopportune occurrence; an embarrassing mischance',
+      def2: ''
+    }];
   x(url, "#chunk-0", [{
     word: '[data-word]@data-word',
     // type: '.word-attributes .main-attr',
@@ -107,15 +114,15 @@ function getWord(cb) {
     // def1: '.wod-definition-container p:nth-child(2)',
     // def2: '.wod-definition-container p:nth-child(3)',
   }])(function(err, obj) {
-    if (err) console.log("[Word]" + err);
-    var url2 = "http://www.merriam-webster.com/dictionary/" + obj[0].word;
-    x(url2, 'div.main-wrapper', [{
-      type: '.word-attributes .main-attr',
-      pro: '.word-attributes .word-syllables',
-      def1: 'div.tense-box li:nth-child(1)',
-      def2: 'div.tense-box li:nth-child(2)',
+    if (err) console.log("[Word 1]" + err);
+    var url2 = "http://www.dictionary.com/browse/" + obj[0].word;
+    x(url2, '#source-luna', [{
+      type: 'span.dbox-pg',
+      pro: 'span.pron',
+      def1: 'div.def-content',
+      // def2: 'div.tense-box li:nth-child(2)',
     }])(function(err, obj2) {
-      if (err) console.log("[Word]" + err);
+      if (err) console.log("[Word 2]" + err);
       obj2[0].word = obj[0].word;
       fs.writeFile(data, JSON.stringify(obj2, null, 2), "utf-8", function(err) {
         fs.readFile(data, function(err, result) {
@@ -486,7 +493,6 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
         <h3>TODAY'S JOKE</h3>
         <div class="well joke">
         <p>Joke</p>
-        <br>
         <p>Punchline</p>
         </div>
       </div>
@@ -499,12 +505,11 @@ function buildHtml(history, word, etymology, googleWord, weather, joke, news, qa
 
 
   var htmlTil = `
-      <div class="col-xs-12">
         <h3>TODAY I LEARNED</h3>
         <div class="well til">
           <p><strong>TIL </strong> Insert stuff here</p>
+          <p class="src">(source)</p>
         </div>
-      </div>
       `;
 
 
