@@ -101,20 +101,13 @@ function getWord(cb) {
   var url = "http://www.dictionary.com/wordoftheday/";
   var data = "data/word.json";
   var ovride = [{
-      word: 'contretemps',
-      type: 'noun',
-      pro: 'kon-truh-tahn',
-      def1: 'an inopportune occurrence; an embarrassing mischance',
-      def2: ''
+      word: 'egalitarian',
     }];
   x(url, "#chunk-0", [{
     word: '[data-word]@data-word',
-    // type: '.word-attributes .main-attr',
-    // pro: '.word-attributes .word-syllables',
-    // def1: '.wod-definition-container p:nth-child(2)',
-    // def2: '.wod-definition-container p:nth-child(3)',
   }])(function(err, obj) {
     if (err) console.log("[Word 1]" + err);
+    //obj = ovride;
     var url2 = "http://www.dictionary.com/browse/" + obj[0].word;
     x(url2, '#source-luna', [{
       type: 'span.dbox-pg',
